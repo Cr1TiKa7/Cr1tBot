@@ -39,6 +39,7 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lbChatters = new Cr1TiKa7_Framework.Controls.ListBox.CustomListBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -53,7 +54,7 @@
             this.btnSend.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.btnSend.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(168)))), ((int)(((byte)(109)))));
             this.btnSend.Icon = null;
-            this.btnSend.Location = new System.Drawing.Point(490, 297);
+            this.btnSend.Location = new System.Drawing.Point(507, 302);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(75, 23);
             this.btnSend.TabIndex = 6;
@@ -68,9 +69,9 @@
             this.txtCommandText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCommandText.Font = new System.Drawing.Font("Segoe UI", 11.25F);
             this.txtCommandText.ForeColor = System.Drawing.Color.White;
-            this.txtCommandText.Location = new System.Drawing.Point(12, 299);
+            this.txtCommandText.Location = new System.Drawing.Point(12, 304);
             this.txtCommandText.Name = "txtCommandText";
-            this.txtCommandText.Size = new System.Drawing.Size(472, 20);
+            this.txtCommandText.Size = new System.Drawing.Size(489, 20);
             this.txtCommandText.TabIndex = 5;
             // 
             // lbChat
@@ -86,10 +87,10 @@
             this.lbChat.ItemHeight = 16;
             this.lbChat.ItemSelectionColor = System.Drawing.Color.DarkSlateGray;
             this.lbChat.ItemsSelectable = true;
-            this.lbChat.Location = new System.Drawing.Point(12, 59);
+            this.lbChat.Location = new System.Drawing.Point(155, 62);
             this.lbChat.Name = "lbChat";
             this.lbChat.OutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
-            this.lbChat.Size = new System.Drawing.Size(553, 234);
+            this.lbChat.Size = new System.Drawing.Size(427, 236);
             this.lbChat.TabIndex = 4;
             // 
             // txtTitle
@@ -114,7 +115,7 @@
             // 
             this.txtFollower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFollower.AutoSize = true;
-            this.txtFollower.Location = new System.Drawing.Point(387, 34);
+            this.txtFollower.Location = new System.Drawing.Point(404, 38);
             this.txtFollower.Name = "txtFollower";
             this.txtFollower.Size = new System.Drawing.Size(38, 13);
             this.txtFollower.TabIndex = 9;
@@ -124,7 +125,7 @@
             // 
             this.txtViews.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtViews.AutoSize = true;
-            this.txtViews.Location = new System.Drawing.Point(387, 11);
+            this.txtViews.Location = new System.Drawing.Point(404, 15);
             this.txtViews.Name = "txtViews";
             this.txtViews.Size = new System.Drawing.Size(38, 13);
             this.txtViews.TabIndex = 10;
@@ -135,7 +136,7 @@
             this.pictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox5.BackgroundImage = global::Cr1tBot.Properties.Resources.Follower;
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox5.Location = new System.Drawing.Point(361, 30);
+            this.pictureBox5.Location = new System.Drawing.Point(378, 34);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(20, 22);
             this.pictureBox5.TabIndex = 15;
@@ -146,7 +147,7 @@
             this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox4.BackgroundImage = global::Cr1tBot.Properties.Resources.Viewer;
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox4.Location = new System.Drawing.Point(361, 8);
+            this.pictureBox4.Location = new System.Drawing.Point(378, 12);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(20, 22);
             this.pictureBox4.TabIndex = 14;
@@ -172,11 +173,30 @@
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
             // 
+            // lbChatters
+            // 
+            this.lbChatters.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbChatters.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbChatters.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.lbChatters.EnableNotification = false;
+            this.lbChatters.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.lbChatters.FormattingEnabled = true;
+            this.lbChatters.ItemHeight = 16;
+            this.lbChatters.ItemSelectionColor = System.Drawing.Color.DarkSlateGray;
+            this.lbChatters.ItemsSelectable = true;
+            this.lbChatters.Location = new System.Drawing.Point(12, 62);
+            this.lbChatters.Name = "lbChatters";
+            this.lbChatters.OutlineColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(37)))), ((int)(((byte)(39)))));
+            this.lbChatters.Size = new System.Drawing.Size(137, 236);
+            this.lbChatters.TabIndex = 16;
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.lbChatters);
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox3);
@@ -191,7 +211,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "MainView";
-            this.Size = new System.Drawing.Size(577, 331);
+            this.Size = new System.Drawing.Size(594, 336);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -214,5 +234,6 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox5;
+        private Cr1TiKa7_Framework.Controls.ListBox.CustomListBox lbChatters;
     }
 }

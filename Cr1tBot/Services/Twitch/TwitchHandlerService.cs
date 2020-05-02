@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
+using Cr1tBot.Models;
 using Cr1tBot.Models.EventArgs;
 using TwitchLib.Api;
+using TwitchLib.Api.Core.Models.Undocumented.Chatters;
 using TwitchLib.Api.V5.Models.Channels;
 using TwitchLib.Client;
 using TwitchLib.Client.Events;
@@ -17,11 +21,13 @@ namespace Cr1tBot.Services.Twitch
         private readonly string _username;
         private TwitchClient _client;
         private TwitchAPI _api;
+        private ChannelAuthed _channel;
 
         #region "Events"
 
         public EventHandler<UserMessageEventArgs> UserMessageReceived;
         public EventHandler<ChannelAuthed> ChannelInfoReceived;
+        public EventHandler<List<ChatterFormatted>> ChattersReceived;
         public EventHandler<OnUserJoinedArgs> UserJoined;
         public EventHandler<OnUserLeftArgs> UserLeft;
 
@@ -38,7 +44,8 @@ namespace Cr1tBot.Services.Twitch
         {
             try
             {
-                var credentials = new ConnectionCredentials(_username, _oauth.Replace("oauth:",""));
+                var userAuth = _oauth.Replace("oauth:", "");
+                var credentials = new ConnectionCredentials(_username, userAuth);
                 var clientOptions = new ClientOptions
                 {
                     MessagesAllowedInPeriod = 750,
@@ -49,17 +56,15 @@ namespace Cr1tBot.Services.Twitch
                 _client.Initialize(credentials, _username);
 
                 _api = new TwitchAPI();
-                _api.Settings.AccessToken = _oauth.Replace("oauth:","");//"8rmxbwdxm06it6qvjwpt1zqyv15kxx";
+                _api.Settings.AccessToken = userAuth;//"oauth:m98wbyj1uzgtyr5mjkgefgrbb3nhhh";
                 _api.Settings.ClientId = "5hi8c6qjnq18zhe2mrmddavovygtee";
 
                 if (_client.IsInitialized)
                     _client.Connect();
 
-                _client.OnMessageReceived += OnMessageReceived;
-                _client.OnUserJoined += OnUserJoined;
-                _client.OnUserLeft += OnUserLeft;
+                _client.OnConnected += OnConnected;
 
-                UpdateChannelInfo();
+                GetUpdatedChannelInfo();
                 ScheduleUpdateChannelInfo();
                 return _client.IsInitialized && _client.IsConnected;
             }
@@ -69,11 +74,25 @@ namespace Cr1tBot.Services.Twitch
             }
         }
 
-        private async Task UpdateChannelInfo()
+        private void OnConnected(object sender, OnConnectedArgs e)
         {
-            var channel = await _api.V5.Channels.GetChannelAsync();
-             ChannelInfoReceived?.Invoke(null,channel);
+            _client.JoinChannel(_username);
+            _client.OnMessageReceived += OnMessageReceived;
+            _client.OnUserJoined += OnUserJoined;
+            _client.OnUserLeft += OnUserLeft;
+            _client.OnIncorrectLogin += OnIncorrectLogin;
         }
+
+        public void Reconnect()
+        {
+          
+        }
+
+        private void OnIncorrectLogin(object sender, OnIncorrectLoginArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
 
         private async Task ScheduleUpdateChannelInfo()
         {
@@ -81,12 +100,35 @@ namespace Cr1tBot.Services.Twitch
             {
                 while (true)
                 {
-                    await UpdateChannelInfo();
+                    await GetUpdatedChannelInfo();
+                    await GetChatters();
                     await Task.Delay(10 * 1000);
                 }
             });
         }
 
+        private async Task GetUpdatedChannelInfo()
+        {
+            var channel = await _api.V5.Channels.GetChannelAsync();
+            if (channel != null)
+                _channel = channel;
+            ChannelInfoReceived?.Invoke(null, channel);
+        }
+        private async Task GetChatters()
+        {
+            var chatters = await _api.Undocumented.GetChattersAsync(_username);
+            if (chatters != null)
+                ChattersReceived?.Invoke(null, chatters);
+        }
+
+
+        public async Task UpdateGame(Game game)
+        {
+            if (_channel?.Id != null)
+            {
+                var channel = await _api.V5.Channels.UpdateChannelAsync(_channel.Id, _channel.Status, game.GameName);
+            }
+        }
 
         #region Events
 
@@ -106,10 +148,16 @@ namespace Cr1tBot.Services.Twitch
             {
                 Emotes = e.ChatMessage.EmoteSet.Emotes,
                 Message = e.ChatMessage.Message,
-                UsernameColor = e.ChatMessage.Color,
-                Username = e.ChatMessage.Username
+                UsernameColor = Color.FromArgb(255,e.ChatMessage.Color),
+                Username = e.ChatMessage.Username,
+                UserType = e.ChatMessage.UserType
             });
         }
         #endregion
+
+        public void SendMessage(string message)
+        {
+            _client.SendMessage(_username,message);
+        }
     }
 }

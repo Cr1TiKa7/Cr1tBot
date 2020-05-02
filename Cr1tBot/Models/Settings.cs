@@ -10,6 +10,8 @@ namespace Cr1tBot.Models
     {
         public string OAuth { get; set; }
         public string Username { get; set; }
+        public bool FirstStartup { get; set; } = true;
         public List<Game> Games { get; set; }
+        public List<Command> Commands { get; set; }
     }
 }

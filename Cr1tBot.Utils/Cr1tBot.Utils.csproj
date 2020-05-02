@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="LiteGuard" Version="2.2.0" />
     <PackageReference Include="Telnet" Version="0.8.4" />
+    <PackageReference Include="TwitchLib.Api" Version="3.1.2" />
   </ItemGroup>
 
 </Project>

@@ -49,6 +49,7 @@
             this.cmbProcesses.MaxDropDownItems = 5;
             this.cmbProcesses.Name = "cmbProcesses";
             this.cmbProcesses.Size = new System.Drawing.Size(407, 28);
+            this.cmbProcesses.Sorted = true;
             this.cmbProcesses.TabIndex = 1;
             // 
             // txtGameName

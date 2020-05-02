@@ -34,9 +34,11 @@ namespace Cr1tBot
             if (e.Uri.ToString().StartsWith("http://127.0.0.1/"))
             {
                 string accessToken = "oauth:" + e.Uri.Fragment.Substring(14, e.Uri.Fragment.IndexOf("&") - 14); //"oauth:" + e.Url.Fragment.Substring(14, e.Url.Fragment.IndexOf("&") - 14);
+                var settings = _settingsService.GetSettings();
                 if (!string.IsNullOrEmpty(accessToken))
                 {
-                    var settings = new Models.Settings();
+                    if (settings == null)
+                        settings = new Models.Settings();
                     settings.OAuth = accessToken;
                     settings.Username = _username;
                     _settingsService.WriteSettings(settings);
@@ -59,12 +61,6 @@ namespace Cr1tBot
         }
         private void OnFrmLoginShown(object sender, EventArgs e)
         {
-            var settings = _settingsService.GetSettings();
-            if (settings != null)
-            {
-                var frmMain = new FrmMain(this, settings);
-                frmMain.Show();
-            }
         }
     }
 }

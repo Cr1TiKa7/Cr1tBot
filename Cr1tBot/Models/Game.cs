@@ -9,7 +9,7 @@
 
         public override string ToString()
         {
-            return $"{ProcessName}.exe";
+            return GameName ?? $"{ProcessName}.exe";
         }
     }
 }

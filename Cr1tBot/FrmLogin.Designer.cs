@@ -32,6 +32,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.wbBrowser)).BeginInit();
             this.SuspendLayout();
             // 
+            // formControllBar1
+            // 
+            this.formControllBar1.Location = new System.Drawing.Point(271, -2);
+            // 
             // wbBrowser
             // 
             this.wbBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -55,6 +59,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cr1TBot by Cr1TiKa7 | Authorization";
             this.Shown += new System.EventHandler(this.OnFrmLoginShown);
+            this.Controls.SetChildIndex(this.formControllBar1, 0);
             this.Controls.SetChildIndex(this.wbBrowser, 0);
             ((System.ComponentModel.ISupportInitialize)(this.wbBrowser)).EndInit();
             this.ResumeLayout(false);

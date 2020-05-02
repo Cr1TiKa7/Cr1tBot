@@ -28,7 +28,13 @@ namespace Cr1tBot.Views.Game
 
         private void OnBtnAddClick(object sender, System.EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtGameName.Text) || cmbProcesses.SelectedItem == null)
+            {
+                lblError.Visible = true;
+                return;
+            }
             Result = (Models.Game)cmbProcesses.SelectedItem;
+            Result.GameName = txtGameName.Text;
             DialogResult = DialogResult.OK;
         }
     }
